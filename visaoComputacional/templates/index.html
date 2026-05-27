@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Imagem IA</title>
+
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0f172a;
+    color: white;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+}
+
+.container{
+    width: 100%;
+    max-width: 900px;
+
+    background: #1e293b;
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+
+    color: #38bdf8;
+}
+
+.upload-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.upload-label{
+    background: #334155;
+    padding: 15px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.upload-label:hover{
+    background: #475569;
+}
+
+input[type="file"]{
+    display: none;
+}
+
+button{
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+
+    background: #38bdf8;
+    color: #0f172a;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover{
+    background: #0ea5e9;
+}
+
+.preview-area{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#preview{
+    max-width: 100%;
+    border-radius: 15px;
+
+    display: none;
+
+    border: 3px solid #38bdf8;
+}
+
+.resultado{
+    margin-top: 30px;
+}
+
+.resultado h2{
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+.imagem-resultado{
+    width: 100%;
+    border-radius: 15px;
+
+    margin-bottom: 20px;
+
+    border: 3px solid #22d3ee;
+}
+
+.dados{
+    background: #334155;
+    padding: 20px;
+
+    border-radius: 15px;
+}
+
+.dados p{
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag{
+    background: #38bdf8;
+    color: #0f172a;
+
+    padding: 8px 15px;
+    border-radius: 999px;
+
+    font-weight: bold;
+}
+</style>
+<body>
+
+    <div class="container">
+
+        <h1>Análise Inteligente de Imagens</h1>
+
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+
+            <label for="foto" class="upload-label">
+                Escolher Imagem
+            </label>
+
+            <input type="file" name="foto" id="foto" accept="image/*" required>
+
+            <button type="submit">
+                Analisar Imagem
+            </button>
+
+        </form>
+
+        <div class="preview-area">
+            <img id="preview" src="" alt="">
+        </div>
+
+        {% if imagem_exibir %}
+
+        <div class="resultado">
+
+            <h2>Resultado da Análise</h2>
+
+            <img src="{{ url_for('static', filename='uploads/resultado.jpg') }}?v={{ v }}" class="imagem-resultado">
+
+            <div class="dados">
+
+                <p>
+                    <strong>Legenda:</strong>
+                    {{ analise.legenda }}
+                </p>
+
+                <p>
+                    <strong>Confiança:</strong>
+                    {{ analise.confianca }}
+                </p>
+
+                <div class="tags">
+                    <strong>Tags:</strong>
+
+                    {% for tag in analise.tags %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <script>
+        const inputFoto = document.getElementById('foto');
+        const preview = document.getElementById('preview');
+
+        inputFoto.addEventListener('change', function () {
+
+            const arquivo = this.files[0];
+
+            if (arquivo) {
+
+                const leitor = new FileReader();
+
+                leitor.onload = function (e) {
+
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+
+                }
+
+                leitor.readAsDataURL(arquivo);
+
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
