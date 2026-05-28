@@ -18,8 +18,7 @@
 
 # UPLOAD_FOLDER = os.path.join('static', 'uploads')
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# AI_ENDPOINT = os.getenv("AZURE_LANGUAGE_ENDPOINT")
-# AI_KEY =      os.getenv("AZURE_LANGUAGE_KEY")
+
 
 
 # @app.route('/', methods = ['GET','POST'])
