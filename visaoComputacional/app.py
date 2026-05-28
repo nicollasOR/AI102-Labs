@@ -118,8 +118,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 AI_ENDPOINT = os.getenv("AZURE_LANGUAGE_ENDPOINT")
 AI_KEY =      os.getenv("AZURE_LANGUAGE_KEY")
 
-# AI_ENDPOINT = 'https://computervisioan-lab.cognitiveservices.azure.com'
-# AI_KEY = 'FrNMinJu1JG6KGGvwZLfNkD4uV39kC4dWEBzijA0iBK4VEDFEcJIJQQJ99CEACYeBjFXJ3w3AAAFACOGeV2C'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

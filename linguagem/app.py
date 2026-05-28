@@ -13,7 +13,7 @@ except ImportError:
 app = Flask(__name__)
 
 AZURE_LANGUAGE_ENDPOINT = os.getenv("AZURE_LANGUAGE_ENDPOINT")
-AZURE_LANGUAGE_KEY = os.getenv("AZURE_LANGUAGE_KEY")
+AZURE_LANGUAGE_KEY =      os.getenv("AZURE_LANGUAGE_KEY")
 
 def criar_cliente_language():
     if not AZURE_LANGUAGE_ENDPOINT or not AZURE_LANGUAGE_KEY:
