@@ -115,8 +115,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-AI_ENDPOINT = os.getenv("AZURE_LANGUAGE_ENDPOINT")
-AI_KEY =      os.getenv("AZURE_LANGUAGE_KEY")
+
 
 
 @app.route('/', methods=['GET', 'POST'])
